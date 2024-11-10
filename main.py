@@ -22,7 +22,7 @@ bot = commands.Bot(command_prefix= '!', intents=intents)
 
 @bot.command(name='code')
 async def code(ctx):
-    await ctx.send("https://github.com/Nicolukazzz/botds/blob/main/code")
+    await ctx.send("https://github.com/Nicolukazzz/botpoke")
 
 @bot.command(name='ayuda')
 async def ayuda(ctx):
