@@ -22,11 +22,11 @@ bot = commands.Bot(command_prefix= '!', intents=intents)
 
 @bot.command(name='code')
 async def code(ctx):
-    await ctx.send("https://github.com/Nicolukazzz/botpoke")
+    await ctx.send("https://github.com/Nicolukazzz/botds/blob/main/code")
 
 @bot.command(name='ayuda')
 async def ayuda(ctx):
-  
+
     help_message = """
 **¡ola!** 
 
@@ -48,36 +48,54 @@ async def ayuda(ctx):
     await ctx.send(help_message)
 
 @bot.command(name='poke')
-async def poke(ctx, arg, arg2: str = None):
+async def poke(ctx, arg, arg_shiny: str = None, arg_back: str = None):
     try:
         pokemon = arg.split(" ", 1)[0].lower()
         result = requests.get("https://pokeapi.co/api/v2/pokemon/" + pokemon)
         
-        if result.status_code !=200:
+        if result.status_code != 200:
             await ctx.send("Pokémon no encontrado :c")
+            return 
+
+        
+        height_url = result.json()['height']
+        weight_url = result.json()['weight']
+        type_url = result.json()['types'][0]['type']['name']
+        image_url_front = result.json()['sprites']['front_default']
+        image_url_back = result.json()['sprites']['back_default']
+        image_url_shiny_front = result.json()['sprites']['front_shiny']
+        image_url_shiny_back = result.json()['sprites']['back_shiny']
+
+        
+        if arg_shiny and arg_shiny.lower() == "shiny":
+            image_url = image_url_shiny_front
+            filename = "pokemon_shiny.png"
         else:
-            height_url = result.json()['height']
-            weight_url = result.json()['weight']
-            type_url = result.json()['types'][0]['type']['name']
-            image_url = result.json()['sprites']['front_default']
-            imageback_url = result.json()['sprites']['back_default']
+            image_url = image_url_front
+            filename = "pokemon.png"
 
-            #Frente
-            response = requests.get(image_url)
-            
-            img = Image.open(BytesIO(response.content))
-            resized_img = img.resize((300, 300))
-            
-            buffer = BytesIO()
-            resized_img.save(buffer, format="PNG")
-            buffer.seek(0)
-            
-            await ctx.send(file=discord.File(fp=buffer, filename="pokemon.png"))
+        
+        response = requests.get(image_url)
+        img = Image.open(BytesIO(response.content))
+        resized_img = img.resize((300, 300))
+        
+        buffer = BytesIO()
+        resized_img.save(buffer, format="PNG")
+        buffer.seek(0)
+        
+        await ctx.send(file=discord.File(fp=buffer, filename=filename))
 
-            #Espaldiña
-            if arg2 and arg2.lower() == "back":
-                response_back = requests.get(imageback_url)
+   
+        if arg_back and arg_back.lower() == "back":
+            if arg_shiny and arg_shiny.lower() == "shiny":
+                image_url_back_to_send = image_url_shiny_back
+                back_filename = "pokemon_shiny_back.png"
+            else:
+                image_url_back_to_send = image_url_back
+                back_filename = "pokemon_back.png"
 
+            response_back = requests.get(image_url_back_to_send)
+            if response_back.status_code == 200:
                 img_back = Image.open(BytesIO(response_back.content))
                 resized_img_back = img_back.resize((300, 300))
                 
@@ -85,16 +103,20 @@ async def poke(ctx, arg, arg2: str = None):
                 resized_img_back.save(buffer_back, format="PNG")
                 buffer_back.seek(0)
 
-                await ctx.send(file=discord.File(fp=buffer_back, filename="pokemon_back.png"))
+                await ctx.send(file=discord.File(fp=buffer_back, filename=back_filename))
             else:
-                await ctx.send("*Si quieres ver la imagen por la parte trasera, usa el argumento 'back' después del nombre 🫵🏿*")
-            await ctx.send(f"""*---Estadísticas---*
+                await ctx.send("No se pudo obtener la imagen de la parte trasera.")
+
+        
+        await ctx.send(f"""*---Estadísticas---*
                            
 **Altura: {height_url}**
 **Peso: {weight_url}**
 **Tipo: {type_url.capitalize()}**""")
     except Exception as e:
         print(f"Error: {e}")
+        await ctx.send("Ha ocurrido un error al intentar consultar la API")
+
 
 
 @poke.error
