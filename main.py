@@ -26,7 +26,7 @@ async def code(ctx):
 
 @bot.command(name='ayuda')
 async def ayuda(ctx):
-    # Crear el mensaje de ayuda básico
+  
     help_message = """
 **¡ola!** 
 
@@ -51,7 +51,6 @@ async def ayuda(ctx):
 async def poke(ctx, arg, arg2: str = None):
     try:
         pokemon = arg.split(" ", 1)[0].lower()
-        #perfil = arg2.split(" ", 1)[0].lower()
         result = requests.get("https://pokeapi.co/api/v2/pokemon/" + pokemon)
         
         if result.status_code !=200:
@@ -75,7 +74,7 @@ async def poke(ctx, arg, arg2: str = None):
             
             await ctx.send(file=discord.File(fp=buffer, filename="pokemon.png"))
 
-            #Espalda
+            #Espaldiña
             if arg2 and arg2.lower() == "back":
                 response_back = requests.get(imageback_url)
 
