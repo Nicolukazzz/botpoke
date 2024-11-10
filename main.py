@@ -37,7 +37,7 @@ async def ayuda(ctx):
 
 * **!ayuda:** Muestra este mensaje de ayuda.
 * **!code:** Muestra el link del código choroto.
-* **!poke [nombre del Pokémon] [back (opcional)]:** Muestra la imagen sobre el Pokémon que escribas, algunas de sus estadísticas y con el argumento "back" podrás ver al pokemón de espalda. Y ya, literalmente no hace nada más kajsdkasd (por ahora). Puedes escribir el nombre como quieras, con mayúsculas, minúsculas o con espacios.
+* **!poke [nombre del Pokémon] [shiny (opcional)] [back (opcional)]:** Muestra la imagen del Pokémon que escribas, algunas de sus estadísticas, escribe "shiny" como segundo argumento para ver su forma shiny y con el argumento "back" podrás ver al pokemón de espalda. Y ya, literalmente no hace nada más kajsdkasd (por ahora). Puedes escribir el nombre como quieras, con mayúsculas, minúsculas o con espacios.
 
 **Ejemplos:**
 `!poke pikachu`
