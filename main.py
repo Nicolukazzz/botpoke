@@ -29,7 +29,7 @@ async def ayuda(ctx):
     # Crear el mensaje de ayuda básico
     help_message = """
 **¡ola!** 
-
+*Creado por Nicolás*
 *Este bot nació en una noche de inspiración inesperada.*
 
 **¿Cómo usarlo?**
