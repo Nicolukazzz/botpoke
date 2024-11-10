@@ -22,7 +22,7 @@ bot = commands.Bot(command_prefix= '!', intents=intents)
 
 @bot.command(name='code')
 async def code(ctx):
-    await ctx.send("https://github.com/Nicolukazzz/botds/blob/main/code")
+    await ctx.send("https://github.com/Nicolukazzz/botpoke")
 
 @bot.command(name='ayuda')
 async def ayuda(ctx):
@@ -42,7 +42,6 @@ async def ayuda(ctx):
 `!poke pikachu`
 
 *El bot utiliza la API de PokeAPI para buscar la imagen del Pokémon - Creado en Python con la libreria Discord y otras cositas.*
-*Pronto estará alojado en un servidor para que sea usado 24/7.*
     """
     await ctx.send(help_message)
 
