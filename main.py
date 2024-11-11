@@ -23,7 +23,7 @@ bot = commands.Bot(command_prefix= '!', intents=intents)
 @bot.command(name='code')
 async def code(ctx):
     embed_git = discord.Embed(title="Repositorio de Github: ", color=0x00ff00)
-    embed_git.description = "https://github.com/Nicolukazzz/botds/blob/main/code"
+    embed_git.description = "https://github.com/Nicolukazzz/botpoke"
     await ctx.send(embed=embed_git)
 
 @bot.command(name='ayuda')
