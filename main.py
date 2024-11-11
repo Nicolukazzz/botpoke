@@ -51,7 +51,7 @@ async def ayuda(ctx):
 async def poke(ctx, arg, arg_shiny: str = None, arg_back: str = None):
     try:
         pokemon = arg.split(" ", 1)[0].lower()
-        result = requests.get("https://pokeapi.co/api/v2/pokemon/" + pokemon)
+        result = requests.get("https://pokeapi.co/api/v2/pokemon/"+pokemon)
         
         if result.status_code != 200:
             await ctx.send("Pokémon no encontrado :c")
@@ -95,17 +95,15 @@ async def poke(ctx, arg, arg_shiny: str = None, arg_back: str = None):
                 back_filename = "pokemon_back.png"
 
             response_back = requests.get(image_url_back_to_send)
-            if response_back.status_code == 200:
-                img_back = Image.open(BytesIO(response_back.content))
-                resized_img_back = img_back.resize((300, 300))
-                
-                buffer_back = BytesIO()
-                resized_img_back.save(buffer_back, format="PNG")
-                buffer_back.seek(0)
+            img_back = Image.open(BytesIO(response_back.content))
+            resized_img_back = img_back.resize((300, 300))
+            
+            buffer_back = BytesIO()
+            resized_img_back.save(buffer_back, format="PNG")
+            buffer_back.seek(0)
 
-                await ctx.send(file=discord.File(fp=buffer_back, filename=back_filename))
-            else:
-                await ctx.send("No se pudo obtener la imagen de la parte trasera.")
+            await ctx.send(file=discord.File(fp=buffer_back, filename=back_filename))
+
 
         
         await ctx.send(f"""*---Estadísticas---*
