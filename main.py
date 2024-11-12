@@ -58,8 +58,9 @@ async def poke(ctx, arg, arg_shiny: str = None):
             return 
 
 
-        first_ability_url = result.json()['abilities'][0]['ability']['name']
-        second_ability_url = result.json()['abilities'][1]['ability']['name']
+        abilities = result.json()['abilities']
+        first_ability_url = abilities[0]['ability']['name']
+        second_ability_url = abilities[1]['ability']['name'] if len(abilities) > 1 else "Ninguna"
         height_url = result.json()['height']
         weight_url = result.json()['weight']
         type_url = result.json()['types'][0]['type']['name']
