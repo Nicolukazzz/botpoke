@@ -89,7 +89,7 @@ async def poke(ctx, arg, arg_shiny: str = None):
         resized_img.save(buffer, format="PNG")
         buffer.seek(0)
         
-        await ctx.send(file=discord.File(fp=buffer, filename=filename))
+        file_front= discord.File(fp=buffer, filename=filename)
 
 
         response_back = requests.get(back_image_url)
@@ -100,7 +100,9 @@ async def poke(ctx, arg, arg_shiny: str = None):
         resized_img_back.save(buffer_back, format="PNG")
         buffer_back.seek(0)
 
-        await ctx.send(file=discord.File(fp=buffer_back, filename=back_filename))
+        file_back = discord.File(fp=buffer_back, filename=back_filename)
+
+        await ctx.send(files=[file_front, file_back])
 
 
         embed_title = f"Estadísticas de *{pokemon.capitalize()}{' Shiny' if arg_shiny and arg_shiny.lower() == 'shiny' else ''}*"
