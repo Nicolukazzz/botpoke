@@ -29,12 +29,12 @@ async def code(ctx):
 @bot.command(name='ayuda')
 async def ayuda(ctx):
     embed = discord.Embed(title="¡Ola!", color=0x00ff00)
-    embed.description = "*Bot creado por Nicolás.*\n*Este bot nació en una noche de inspiración inesperada (distorsión de la realidad).*"
+    embed.description = "*Bot creado por Nicolás*"
 
     embed.add_field(name="¿Cómo usarlo?", value="""
     * **!ayuda:** Muestra este mensaje de ayuda.
     * **!code:** Muestra el link del código choroto.
-    * **!poke [nombre del Pokémon] [shiny (opcional)]:** Muestra la imagen del Pokémon que escribas, algunas de sus estadísticas. Escribe "shiny" como segundo argumento para ver su forma shiny. Y ya, literalmente no hace nada más kajsdkasd (por ahora). Puedes escribir el nombre como quieras, con mayúsculas, minúsculas o con espacios.
+    * **!poke [nombre del Pokémon] [shiny (opcional)]:** Muestra la imagen del Pokémon que escribas, algunas de sus estadísticas. Escribe "shiny" como segundo argumento para ver su forma shiny. Puedes escribir el nombre como quieras, con mayúsculas, minúsculas o con espacios.
     """, inline=False)
 
     embed.add_field(name="Ejemplos:", value="""
